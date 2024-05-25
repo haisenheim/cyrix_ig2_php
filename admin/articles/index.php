@@ -12,7 +12,8 @@
     <?php
         try{
             $conn = new PDO('mysql:host=localhost;dbname=tds4_db;charset=utf8', 'root', '');
-            $string = "select a.id,titre,au.nom auteur,c.nom categorie,a.corps,publie_a date,a.actif from articles a, categories c,auteurs au where a.category_id = c.id AND a.auteur_id = au.id";
+            //$string = "select a.id,titre,au.nom auteur,c.nom categorie,a.corps,publie_a date,a.actif from articles a, categories c,auteurs au where a.category_id = c.id AND a.auteur_id = au.id";
+            $string = "select a.id,titre,au.nom auteur,c.nom categorie,a.corps,publie_a date,a.actif from articles a LEFT JOIN categories c ON (a.category_id = c.id) LEFT JOIN auteurs au ON (au.id = a.auteur_id)";
             $requete = $conn->prepare($string);
             $requete->execute();
             $articles = $requete->fetchAll();
@@ -26,11 +27,11 @@
             <div class="d-flex justify-content-between">
                 <h1 class="">LISTE DES ARTICLES</h1>
                 <div>
-                <a class="btn btn-success mt-2" href="#">Ajouter un article</a>
+                <a class="btn btn-success mt-2" href="/cyrix/admin/articles/create.php">Ajouter un article</a>
                 </div>
             </div>
             <div>
-                <table class="table table-bordered">
+                <table class="table table-bordered table-hover table-striped">
                     <thead>
                         <tr>
                             <th>TITRE</th>
@@ -52,7 +53,7 @@
                                 <td>
                                     <ul class="list-inline mb-0">
                                         <li class="list-inline-item">
-                                            <a class="btn btn-warning btn-sm" href="#">Modifier</a>
+                                            <a class="btn btn-warning btn-sm" href="/cyrix/admin/articles/edit.php?id=<?= $item['id'] ?>">Modifier</a>
                                         </li>
                                         <li class="list-inline-item">
                                             <?php if($item['actif']): ?>
