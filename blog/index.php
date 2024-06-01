@@ -12,7 +12,8 @@
     <?php
         try{
             $conn = new PDO('mysql:host=localhost;dbname=tds4_db;charset=utf8', 'root', '');
-            $string = "select a.id,titre,au.nom auteur,c.nom categorie,a.corps,publie_a date from articles a, categories c,auteurs au where a.category_id = c.id AND a.auteur_id = au.id";
+            //$string = "select a.id,titre,au.nom auteur,c.nom categorie,a.corps,publie_a date from articles a, categories c,auteurs au where a.category_id = c.id AND a.auteur_id = au.id";
+            $string = "select a.id,titre,au.nom auteur,c.nom categorie,a.corps,publie_a date,a.actif from articles a LEFT JOIN categories c ON (a.category_id = c.id) LEFT JOIN auteurs au ON (au.id = a.auteur_id)";
             $requete = $conn->prepare($string);
             $requete->execute();
             $articles = $requete->fetchAll();

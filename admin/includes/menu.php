@@ -12,6 +12,9 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/cyrix/admin/articles/index.php">ARTICLES</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/cyrix/admin/auteurs/index.php">AUTEURS</a>
+        </li>
       </ul>
       <form class="d-flex" role="search">
         <input class="form-control me-2" type="search" placeholder="Faire une recherche ..." aria-label="Search">
